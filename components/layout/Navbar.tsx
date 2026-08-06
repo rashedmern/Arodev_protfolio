@@ -23,6 +23,11 @@ export default function Navbar() {
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -42,11 +47,9 @@ export default function Navbar() {
       passive: true,
     });
 
-    return () =>
-      window.removeEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll while mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
 
@@ -55,11 +58,11 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const isDark = resolvedTheme === "dark";
+const isDark = mounted ? resolvedTheme === "dark" : true;
 
-  const navTextColor = scrolled
-    ? "text-white"
-    : isDark
+const navTextColor = scrolled
+  ? "text-white"
+  : isDark
     ? "text-white"
     : "text-black";
 
@@ -108,7 +111,6 @@ export default function Navbar() {
           `}
         >
           {/* Logo */}
-
           <Link href="/" className="shrink-0">
             <Image
               src="/logos/Arodev.png"
@@ -119,7 +121,8 @@ export default function Navbar() {
               unoptimized
             />
           </Link>
-           {/* Desktop Navigation */}
+
+          {/* Desktop Navigation */}
           <ul className="hidden items-center gap-12 lg:flex">
             {navLinks.map((link) => (
               <li key={link.name}>
@@ -143,13 +146,10 @@ export default function Navbar() {
               href="/contact"
               className="group relative overflow-hidden rounded-full"
             >
-              {/* Background */}
               <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#1D4ED8] transition duration-500 group-hover:scale-105" />
 
-              {/* Glow */}
               <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#2563EB] to-[#60A5FA] opacity-0 blur-xl transition duration-500 group-hover:opacity-100" />
 
-              {/* Text */}
               <span className="relative flex items-center gap-2 px-7 py-3 text-[15px] font-semibold text-white">
                 Get in touch
 
@@ -171,85 +171,82 @@ export default function Navbar() {
           <div className="flex items-center gap-3 lg:hidden">
             <ThemeToggle />
 
-<button
-  type="button"
-  aria-label={menuOpen ? "Close menu" : "Open menu"}
-  onClick={() => setMenuOpen((prev) => !prev)}
-  className={`
-    relative
-    flex
-    h-11
-    w-11
-    items-center
-    justify-center
-    rounded-full
-    transition-all
-    duration-300
-    ${
-      scrolled || menuOpen
-        ? "border border-white/10 bg-white/10 backdrop-blur-xl"
-        : "border border-transparent"
-    }
-  `}
->
-  <div className="relative h-5 w-5">
-    {/* Top */}
-    <motion.span
-      className="absolute left-0 top-[2px] h-[2px] w-5 rounded-full"
-      style={{
-        background:
-          scrolled || isDark || menuOpen ? "#fff" : "#111827",
-      }}
-      animate={{
-        rotate: menuOpen ? 45 : 0,
-        y: menuOpen ? 7 : 0,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 500,
-        damping: 34,
-        mass: 0.7,
-      }}
-    />
+            <button
+              type="button"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMenuOpen((prev) => !prev)}
+              className={`
+                relative
+                flex
+                h-11
+                w-11
+                items-center
+                justify-center
+                rounded-full
+                transition-all
+                duration-300
+                ${
+                  scrolled || menuOpen
+                    ? "border border-white/10 bg-white/10 backdrop-blur-xl"
+                    : "border border-transparent"
+                }
+              `}
+            >
+              <div className="relative h-5 w-5">
+                {/* Top */}
+                <motion.span
+                  className="absolute left-0 top-[2px] h-[2px] w-5 rounded-full"
+                  style={{
+                    background: "#fff",
+                  }}
+                  animate={{
+                    rotate: menuOpen ? 45 : 0,
+                    y: menuOpen ? 7 : 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 34,
+                    mass: 0.7,
+                  }}
+                />
 
-    {/* Middle */}
-    <motion.span
-      className="absolute left-0 top-[9px] h-[2px] w-5 rounded-full"
-      style={{
-        background:
-          scrolled || isDark || menuOpen ? "#fff" : "#111827",
-      }}
-      animate={{
-        opacity: menuOpen ? 0 : 1,
-        scaleX: menuOpen ? 0 : 1,
-      }}
-      transition={{
-        duration: 0.18,
-      }}
-    />
+                {/* Middle */}
+                <motion.span
+                  className="absolute left-0 top-[9px] h-[2px] w-5 rounded-full"
+                  style={{
+                    background: "#fff",
+                  }}
+                  animate={{
+                    opacity: menuOpen ? 0 : 1,
+                    scaleX: menuOpen ? 0 : 1,
+                  }}
+                  transition={{
+                    duration: 0.18,
+                  }}
+                />
 
-    {/* Bottom */}
-    <motion.span
-      className="absolute right-0 top-[16px] h-[2px] rounded-full"
-      style={{
-        background:
-          scrolled || isDark || menuOpen ? "#fff" : "#111827",
-      }}
-      animate={{
-        rotate: menuOpen ? -45 : 0,
-        y: menuOpen ? -7 : 0,
-        width: menuOpen ? 20 : 14,
-        x: menuOpen ? 0 : 6,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 500,
-        damping: 34,
-        mass: 0.7,
-      }}
-    />
-  </div>
-</button>
+                {/* Bottom */}
+                <motion.span
+                  className="absolute right-0 top-[16px] h-[2px] rounded-full"
+                  style={{
+                    background: "#fff",
+                  }}
+                  animate={{
+                    rotate: menuOpen ? -45 : 0,
+                    y: menuOpen ? -7 : 0,
+                    width: menuOpen ? 20 : 14,
+                    x: menuOpen ? 0 : 6,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 34,
+                    mass: 0.7,
+                  }}
+                />
+              </div>
+            </button>
           </div>
         </motion.nav>
       </Container>
