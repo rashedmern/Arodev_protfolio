@@ -21,18 +21,13 @@ const navLinks = [
 export default function Navbar() {
   const { resolvedTheme } = useTheme();
 
-  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     let ticking = false;
 
-    const handleScroll = () => {
+    const onScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           setScrolled(window.scrollY > 20);
@@ -43,15 +38,22 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll, {
+    window.addEventListener("scroll", onScroll, {
       passive: true,
     });
 
     return () =>
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (!mounted) return null;
+  // Lock body scroll while mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   const isDark = resolvedTheme === "dark";
 
@@ -62,7 +64,7 @@ export default function Navbar() {
     : "text-black";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[999] pointer-events-none">
+    <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
       <Container>
         <motion.nav
           initial={false}
@@ -72,9 +74,9 @@ export default function Navbar() {
           }}
           transition={{
             type: "spring",
-            stiffness: 120,
-            damping: 22,
-            mass: 0.9,
+            stiffness: 140,
+            damping: 20,
+            mass: 1,
           }}
           className={`
             pointer-events-auto
@@ -82,29 +84,31 @@ export default function Navbar() {
             h-20
             items-center
             justify-between
+            overflow-hidden
             rounded-full
             px-8
-
-            transition-[background-color,border-color,box-shadow]
-            duration-500
+            transition-all
+            duration-700
+            ease-out
 
             ${
               scrolled
                 ? `
-                  border border-white/10
-                  bg-black/45
-                  backdrop-blur-[22px]
-                  shadow-[0_20px_60px_rgba(0,0,0,.25)]
-                `
+                border border-white/10
+                bg-black/45
+                backdrop-blur-[22px]
+                shadow-[0_20px_60px_rgba(0,0,0,.25)]
+              `
                 : `
-                  border border-transparent
-                  bg-transparent
-                  shadow-none
-                `
+                border border-transparent
+                bg-transparent
+                shadow-none
+              `
             }
           `}
         >
           {/* Logo */}
+
           <Link href="/" className="shrink-0">
             <Image
               src="/logos/Arodev.png"
@@ -115,8 +119,7 @@ export default function Navbar() {
               unoptimized
             />
           </Link>
-
-          {/* Desktop Navigation */}
+           {/* Desktop Navigation */}
           <ul className="hidden items-center gap-12 lg:flex">
             {navLinks.map((link) => (
               <li key={link.name}>
@@ -131,7 +134,8 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-                    {/* Right Side */}
+
+          {/* Right Side */}
           <div className="hidden items-center gap-4 lg:flex">
             <ThemeToggle />
 
@@ -139,23 +143,21 @@ export default function Navbar() {
               href="/contact"
               className="group relative overflow-hidden rounded-full"
             >
-              {/* Button Background */}
-              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#1D4ED8] transition-all duration-500 group-hover:scale-[1.03]" />
+              {/* Background */}
+              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#1D4ED8] transition duration-500 group-hover:scale-105" />
 
               {/* Glow */}
-              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#2563EB] to-[#60A5FA] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100" />
+              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#2563EB] to-[#60A5FA] opacity-0 blur-xl transition duration-500 group-hover:opacity-100" />
 
               {/* Text */}
               <span className="relative flex items-center gap-2 px-7 py-3 text-[15px] font-semibold text-white">
                 Get in touch
 
                 <motion.span
-                  animate={{
-                    x: [0, 4, 0],
-                  }}
+                  animate={{ x: [0, 4, 0] }}
                   transition={{
+                    duration: 1.5,
                     repeat: Infinity,
-                    duration: 1.6,
                     ease: "easeInOut",
                   }}
                 >
@@ -169,11 +171,87 @@ export default function Navbar() {
           <div className="flex items-center gap-3 lg:hidden">
             <ThemeToggle />
 
+<button
+  type="button"
+  aria-label={menuOpen ? "Close menu" : "Open menu"}
+  onClick={() => setMenuOpen((prev) => !prev)}
+  className={`
+    relative
+    flex
+    h-11
+    w-11
+    items-center
+    justify-center
+    rounded-full
+    transition-all
+    duration-300
+    ${
+      scrolled || menuOpen
+        ? "border border-white/10 bg-white/10 backdrop-blur-xl"
+        : "border border-transparent"
+    }
+  `}
+>
+  <div className="relative h-5 w-5">
+    {/* Top */}
+    <motion.span
+      className="absolute left-0 top-[2px] h-[2px] w-5 rounded-full"
+      style={{
+        background:
+          scrolled || isDark || menuOpen ? "#fff" : "#111827",
+      }}
+      animate={{
+        rotate: menuOpen ? 45 : 0,
+        y: menuOpen ? 7 : 0,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 34,
+        mass: 0.7,
+      }}
+    />
 
-           
+    {/* Middle */}
+    <motion.span
+      className="absolute left-0 top-[9px] h-[2px] w-5 rounded-full"
+      style={{
+        background:
+          scrolled || isDark || menuOpen ? "#fff" : "#111827",
+      }}
+      animate={{
+        opacity: menuOpen ? 0 : 1,
+        scaleX: menuOpen ? 0 : 1,
+      }}
+      transition={{
+        duration: 0.18,
+      }}
+    />
+
+    {/* Bottom */}
+    <motion.span
+      className="absolute right-0 top-[16px] h-[2px] rounded-full"
+      style={{
+        background:
+          scrolled || isDark || menuOpen ? "#fff" : "#111827",
+      }}
+      animate={{
+        rotate: menuOpen ? -45 : 0,
+        y: menuOpen ? -7 : 0,
+        width: menuOpen ? 20 : 14,
+        x: menuOpen ? 0 : 6,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 34,
+        mass: 0.7,
+      }}
+    />
+  </div>
+</button>
           </div>
         </motion.nav>
-
       </Container>
     </header>
   );

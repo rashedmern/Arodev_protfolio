@@ -81,7 +81,7 @@ export default function Cursor() {
       className={`pointer-events-none fixed left-0 top-0 z-[9999] h-[14px] w-[14px] rounded-full ${
         isDark
           ? "bg-gradient-to-br from-[#FFB347] via-[#FF8C42] to-[#FF5F00] shadow-[0_0_18px_rgba(255,140,66,0.55)]"
-          : "bg-black"
+          : "bg-orange-500 shadow-[0_0_18px_rgba(255,140,66,0.55)]"
       }`}
     />
   );
