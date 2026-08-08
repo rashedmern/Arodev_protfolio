@@ -100,8 +100,8 @@ export default function Footer() {
    */
   if (!mounted) {
     return (
-      <footer className="relative bg-white py-20 dark:bg-[#050816]">
-        <Container />
+      <footer className="relative overflow-hidden bg-white py-20 text-black dark:bg-[#050816] dark:text-white">
+        <div className="h-[400px] w-full" />
       </footer>
     );
   }
@@ -122,9 +122,8 @@ export default function Footer() {
         ===================================================== */}
 
         <div className="grid gap-16 py-20 md:grid-cols-[1.4fr_1fr_1fr] md:gap-12">
-          {/* =====================================================
-              BRAND
-          ===================================================== */}
+
+          {/* BRAND */}
 
           <motion.div
             initial={{
@@ -146,16 +145,19 @@ export default function Footer() {
           >
             {/* Logo */}
 
-         <a
-  href="/"
-  className="inline-flex items-center"
->
-  <img
-    src="/logos/Arodev.png"
-    alt="Arodev"
-    className="h-20 w-auto object-contain"
-  />
-</a>
+            <a
+              href="/"
+              className="inline-flex items-center"
+            >
+              <Image
+                src="/logos/Arodev.png"
+                alt="Arodev"
+                width={185}
+                height={50}
+                priority
+                className="h-20 w-auto object-contain"
+              />
+            </a>
 
             {/* Description */}
 
@@ -171,7 +173,7 @@ export default function Footer() {
             {/* Email */}
 
             <a
-              href="mailto:hello@arodev.com"
+              href="mailto:aroedev.official@gmail.com"
               className="group mt-8 inline-flex items-center gap-3 text-sm font-medium"
             >
               <Mail
@@ -192,9 +194,7 @@ export default function Footer() {
             </a>
           </motion.div>
 
-          {/* =====================================================
-              NAVIGATION
-          ===================================================== */}
+          {/* NAVIGATION */}
 
           <motion.div
             initial={{
@@ -250,9 +250,7 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* =====================================================
-              CONNECT
-          ===================================================== */}
+          {/* CONNECT */}
 
           <motion.div
             initial={{
@@ -307,9 +305,7 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* =================================================
-                SOCIAL ICONS
-            ================================================= */}
+            {/* SOCIAL ICONS */}
 
             <div className="mt-9 flex items-center gap-3">
               {socialLinks.map((social) => (
@@ -332,9 +328,7 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        {/* =====================================================
-            BOTTOM BAR
-        ===================================================== */}
+        {/* BOTTOM BAR */}
 
         <div
           className={`flex flex-col gap-5 border-t py-7 text-xs transition-colors duration-500 md:flex-row md:items-center md:justify-between ${
@@ -355,9 +349,7 @@ export default function Footer() {
             <a
               href="/privacy"
               className={`transition-colors duration-300 ${
-                isDark
-                  ? "hover:text-white"
-                  : "hover:text-black"
+                isDark ? "hover:text-white" : "hover:text-black"
               }`}
             >
               Privacy Policy
@@ -366,9 +358,7 @@ export default function Footer() {
             <a
               href="/terms"
               className={`transition-colors duration-300 ${
-                isDark
-                  ? "hover:text-white"
-                  : "hover:text-black"
+                isDark ? "hover:text-white" : "hover:text-black"
               }`}
             >
               Terms of Use
@@ -377,9 +367,7 @@ export default function Footer() {
             <a
               href="/sitemap"
               className={`transition-colors duration-300 ${
-                isDark
-                  ? "hover:text-white"
-                  : "hover:text-black"
+                isDark ? "hover:text-white" : "hover:text-black"
               }`}
             >
               Sitemap
