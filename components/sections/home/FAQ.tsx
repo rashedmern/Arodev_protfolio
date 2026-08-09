@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import Container from "@/components/layout/Container";
 
@@ -299,6 +300,7 @@ export default function FAQ() {
                     }`}
                   >
                     {/* Moving light */}
+
                     <motion.div
                       initial={{
                         x: "-120%",
@@ -329,77 +331,77 @@ export default function FAQ() {
           })}
         </div>
 
-{/* =========================================================
-    IDEA CTA
-========================================================= */}
+        {/* =========================================================
+            IDEA CTA
+        ========================================================= */}
 
-<motion.div
-  initial={{
-    opacity: 0,
-    y: 35,
-  }}
-  whileInView={{
-    opacity: 1,
-    y: 0,
-  }}
-  viewport={{
-    once: true,
-    amount: 0.3,
-  }}
-  transition={{
-    duration: 0.9,
-    ease: [0.22, 1, 0.36, 1],
-  }}
-  className="relative flex justify-center py-32 md:py-40"
->
-  {/* Subtle Background Glow */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 35,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
+          transition={{
+            duration: 0.9,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="relative flex justify-center py-32 md:py-40"
+        >
+          {/* Subtle Background Glow */}
 
-  <div
-    className={`pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px] ${
-      isDark ? "bg-blue-500/10" : "bg-blue-500/5"
-    }`}
-  />
+          <div
+            className={`pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px] ${
+              isDark ? "bg-blue-500/10" : "bg-blue-500/5"
+            }`}
+          />
 
-  {/* CTA */}
+          {/* CTA */}
 
-  <a
-    href="/contact"
-    className="group relative z-10 inline-block"
-  >
-    {/* TEXT */}
+          <Link
+            href="/idea"
+            className="group relative z-10 inline-block"
+          >
+            {/* TEXT */}
 
-    <h2
-      className={`text-5xl font-normal leading-[0.95] tracking-[-0.055em] md:text-6xl lg:text-[72px] ${
-        isDark ? "text-white" : "text-black"
-      }`}
-    >
-      Have an idea?
-      <br />
+            <h2
+              className={`text-5xl font-normal leading-[0.95] tracking-[-0.055em] md:text-6xl lg:text-[72px] ${
+                isDark ? "text-white" : "text-black"
+              }`}
+            >
+              Have an idea?
+              <br />
 
-      {/* UNDERLINED TEXT */}
+              {/* UNDERLINED TEXT */}
 
-      <span className="relative inline-block">
-        Tell us about it.
+              <span className="relative inline-block">
+                Tell us about it.
 
-        {/* Base underline */}
+                {/* Base underline */}
 
-        <span
-          className={`absolute -bottom-3 left-0 h-px w-full ${
-            isDark ? "bg-white/20" : "bg-black/20"
-          }`}
-        />
+                <span
+                  className={`absolute -bottom-3 left-0 h-px w-full ${
+                    isDark ? "bg-white/20" : "bg-black/20"
+                  }`}
+                />
 
-        {/* Center → Both Sides Animation */}
+                {/* Center → Both Sides Animation */}
 
-        <span
-          className={`absolute -bottom-3 left-0 h-px w-full origin-center scale-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 ${
-            isDark ? "bg-white" : "bg-black"
-          }`}
-        />
-      </span>
-    </h2>
-  </a>
-</motion.div>
+                <span
+                  className={`absolute -bottom-3 left-0 h-px w-full origin-center scale-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 ${
+                    isDark ? "bg-white" : "bg-black"
+                  }`}
+                />
+              </span>
+            </h2>
+          </Link>
+        </motion.div>
       </Container>
     </section>
   );

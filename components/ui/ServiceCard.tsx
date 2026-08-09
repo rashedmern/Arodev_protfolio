@@ -12,25 +12,46 @@ export default function ServiceCard({
   description,
 }: Props) {
   return (
-    <div className="service-card border-b border-white/10 py-24">
-      <div className="flex gap-8">
+    <div className="w-full">
+      <div className="flex w-full flex-col gap-8 rounded-[32px] bg-[#101010] p-6 sm:p-8 md:p-10 lg:p-14">
+        {/* Number */}
 
         <span className="text-sm text-white/40">
           {number}
         </span>
 
-        <div>
+        {/* Content */}
 
-          <h3 className="text-5xl font-semibold text-white">
+        <div>
+          <h3
+            className="
+              text-3xl
+              font-semibold
+              tracking-[-0.04em]
+              text-white
+              sm:text-4xl
+              md:text-[42px]
+              lg:text-5xl
+            "
+          >
             {title}
           </h3>
 
-          <p className="mt-6 max-w-xl text-lg leading-8 text-white/60">
+          <p
+            className="
+              mt-5
+              max-w-xl
+              text-base
+              leading-7
+              text-white/60
+              sm:mt-6
+              sm:text-lg
+              sm:leading-8
+            "
+          >
             {description}
           </p>
-
         </div>
-
       </div>
     </div>
   );

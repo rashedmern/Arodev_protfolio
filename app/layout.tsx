@@ -21,17 +21,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-   <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body>
-      <ThemeProvider
-  attribute="class"
-  defaultTheme="dark"
-  enableSystem={false}
-  disableTransitionOnChange
->
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
           <Cursor />
           <Navbar />
-          {children}
+
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>

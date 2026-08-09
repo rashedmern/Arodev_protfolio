@@ -21,17 +21,17 @@ export default function WhatWeDo() {
 
   return (
     <section
-      className={`relative overflow-hidden py-32 transition-colors duration-500 ${
+      className={`relative overflow-hidden py-20 sm:py-24 md:py-28 lg:py-32 transition-colors duration-500 ${
         isDark ? "bg-transparent" : "bg-white"
       }`}
     >
       <Container>
         {/* Top */}
-        <div className="grid grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10 lg:gap-12">
           {/* Left */}
-          <div className="col-span-3">
+          <div className="md:col-span-3">
             <p
-              className={`text-[18px] font-semibold uppercase tracking-[0.12em] ${
+              className={`text-[15px] font-semibold uppercase tracking-[0.12em] sm:text-[16px] md:text-[18px] ${
                 isDark
                   ? "bg-gradient-to-r from-[#2563EB] to-[#60A5FA] bg-clip-text text-transparent"
                   : "text-[#2563EB]"
@@ -42,9 +42,9 @@ export default function WhatWeDo() {
           </div>
 
           {/* Right */}
-          <div className="col-span-9">
+          <div className="md:col-span-9">
             <h2
-              className={`max-w-[930px] text-[56px] font-normal leading-[1.15] transition-colors duration-500 ${
+              className={`max-w-[930px] text-[32px] font-normal leading-[1.15] transition-colors duration-500 sm:text-[40px] md:text-[48px] lg:text-[56px] ${
                 isDark ? "text-white" : "text-black"
               }`}
             >
@@ -56,7 +56,7 @@ export default function WhatWeDo() {
         </div>
 
         {/* Services */}
-        <div className="mt-28">
+        <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-28">
           <StickyServices />
         </div>
       </Container>
