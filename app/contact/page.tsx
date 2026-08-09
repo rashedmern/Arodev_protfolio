@@ -43,7 +43,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{
               duration: 0.9,
-              ease: smoothEase,
+              ease: [0.22, 1, 0.36, 1] as const,
             }}
             className="mx-auto max-w-[650px] text-center text-[48px] font-medium leading-[0.95] tracking-[-0.055em] sm:text-[64px] md:text-[76px]"
           >
@@ -60,7 +60,7 @@ export default function ContactPage() {
             transition={{
               delay: 0.15,
               duration: 0.9,
-              ease: smoothEase,
+              ease: [0.22, 1, 0.36, 1] as const,
             }}
             className="mx-auto mt-20 max-w-[650px] sm:mt-24"
           >
@@ -71,7 +71,7 @@ export default function ContactPage() {
               transition={{
                 delay: 0.25,
                 duration: 0.7,
-                ease: smoothEase,
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
             >
               <p className="mb-5 text-base text-foreground">
@@ -91,7 +91,7 @@ export default function ContactPage() {
                       transition={{
                         delay: 0.3 + index * 0.04,
                         duration: 0.5,
-                        ease: smoothEase,
+                        ease: [0.22, 1, 0.36, 1] as const,
                       }}
                       whileHover={{
                         y: -2,
@@ -119,7 +119,7 @@ export default function ContactPage() {
               transition={{
                 delay: 0.5,
                 duration: 0.7,
-                ease: smoothEase,
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
               className="mt-14"
             >
@@ -139,7 +139,7 @@ export default function ContactPage() {
               transition={{
                 delay: 0.58,
                 duration: 0.7,
-                ease: smoothEase,
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
               className="mt-8"
             >
@@ -159,7 +159,7 @@ export default function ContactPage() {
               transition={{
                 delay: 0.66,
                 duration: 0.7,
-                ease: smoothEase,
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
               className="mt-8"
             >
@@ -179,7 +179,7 @@ export default function ContactPage() {
               transition={{
                 delay: 0.74,
                 duration: 0.7,
-                ease: smoothEase,
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
               className="mt-12"
             >
@@ -200,7 +200,7 @@ export default function ContactPage() {
                       transition={{
                         delay: 0.78 + index * 0.05,
                         duration: 0.5,
-                        ease: smoothEase,
+                        ease: [0.22, 1, 0.36, 1] as const,
                       }}
                       whileHover={{
                         y: -2,
@@ -228,7 +228,7 @@ export default function ContactPage() {
               transition={{
                 delay: 0.9,
                 duration: 0.7,
-                ease: smoothEase,
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
               className="mt-12"
             >
@@ -257,7 +257,7 @@ export default function ContactPage() {
               transition={{
                 delay: 0.98,
                 duration: 0.7,
-                ease: smoothEase,
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
               whileHover={{
                 y: -3,
