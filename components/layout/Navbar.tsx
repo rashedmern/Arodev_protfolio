@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 
 import Container from "./Container";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "@/components/ui/Logo";
 
 const navLinks = [
   { name: "Services", href: "/services" },
@@ -68,6 +69,8 @@ export default function Navbar() {
       ? "text-white"
       : "text-black";
 
+  const isLogoWhite = scrolled || menuOpen || isDark;
+
   return (
     <>
       {/* =========================================
@@ -127,18 +130,10 @@ export default function Navbar() {
 
             <Link
               href="/"
-              className="relative z-[10001] shrink-0"
+              className="relative z-[10001] shrink-0 flex items-center"
               onClick={() => setMenuOpen(false)}
             >
-              <Image
-                src="/logos/Arodev.png"
-                alt="Arodev"
-                width={185}
-                height={42}
-                priority
-                unoptimized
-                className="h-auto w-[130px] sm:w-[150px] md:w-[185px]"
-              />
+              <Logo isWhite={isLogoWhite} size="md" />
             </Link>
 
             {/* =========================================

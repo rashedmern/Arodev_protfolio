@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import Container from "@/components/layout/Container";
+import Logo from "@/components/ui/Logo";
 
 const socialLinks = [
   {
@@ -150,14 +151,7 @@ export default function Footer() {
               href="/"
               className="inline-flex items-center"
             >
-              <Image
-                src="/logos/Arodev.png"
-                alt="Arodev"
-                width={185}
-                height={50}
-                priority
-                className="h-20 w-auto object-contain"
-              />
+              <Logo isWhite={isDark} size="lg" />
             </a>
 
             {/* Description */}

@@ -6,12 +6,15 @@ import Navbar from "@/components/layout/Navbar";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "Arodev",
-  description: "Arodev Portfolio",
+  title: "REV Autowares",
+  description: "REV Autowares — Digital Experience, Design & Development",
   icons: {
-    icon: "/icon/favicon.png",
+    icon: [
+      { url: "/icon/favicon.png" },
+      { url: "/favicon.ico" },
+    ],
     shortcut: "/icon/favicon.png",
-    apple: "/icon/favicon.png",
+    apple: "/icon/apple-touch-icon.png",
   },
 };
 
